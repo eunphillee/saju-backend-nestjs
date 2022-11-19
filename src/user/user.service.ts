@@ -23,6 +23,8 @@ export class UserService {
     private userRepository: Repository<User>,
     @InjectRepository(Member)
     private memberRepository: Repository<Member>,
+    @InjectRepository(MemberManse)
+    private memberManseRepository: Repository<MemberManse>,
     private jwtService: JwtService,
   ) {}
 
@@ -86,7 +88,7 @@ export class UserService {
       );
 
       //멤버 만세력 추가
-      await MemberManse.insert(memberManse);
+      await this.memberManseRepository.insert(memberManse);
 
       const payload = { email };
       const accessToken = await this.jwtService.sign(payload);

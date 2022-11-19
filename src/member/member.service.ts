@@ -18,6 +18,8 @@ export class MemberService {
   constructor(
     @InjectRepository(Member)
     private memberRepository: Repository<Member>,
+    @InjectRepository(MemberManse)
+    private memberManseRepository: Repository<MemberManse>,
   ) {}
 
   /**
@@ -52,7 +54,7 @@ export class MemberService {
       );
 
       //멤버 만세력 추가
-      await MemberManse.insert(memberManse);
+      await this.memberManseRepository.insert(memberManse);
     } catch (error) {
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -117,7 +119,6 @@ export class MemberService {
       );
       return result;
     } catch (error) {
-      console.log(error);
       throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

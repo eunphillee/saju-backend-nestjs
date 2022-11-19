@@ -1,12 +1,11 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import * as dotenv from 'dotenv';
 import { GroupMember } from 'src/entities/group-member.entity';
 import { Group } from 'src/entities/group.entity';
 import { Manse } from 'src/entities/manse.entity';
 import { MemberManse } from 'src/entities/member-manse.entity';
 import { Member } from 'src/entities/member.entity';
 import { User } from 'src/entities/user.entity';
-
+import * as dotenv from 'dotenv';
 dotenv.config();
 const entityArr = [User, Member, MemberManse, Manse, Group, GroupMember];
 
@@ -51,24 +50,6 @@ if (process.env.NODE_ENV === 'dev') {
     username: process.env.PROD_DB_USERNAME,
     password: process.env.PROD_DB_PASSWORD,
     database: process.env.PROD_DB_DATABASE,
-    // replication: {
-    //   master: {
-    //     host: process.env.PROD_DB_WRITER_HOST,
-    //     port: 3306,
-    //     username: process.env.PROD_DB_USERNAME,
-    //     password: process.env.PROD_DB_PASSWORD,
-    //     database: process.env.PROD_DB_DATABASE,
-    //   },
-    //   slaves: [
-    //     {
-    //       host: process.env.PROD_DB_READER_HOST,
-    //       port: 3306,
-    //       username: process.env.PROD_DB_USERNAME,
-    //       password: process.env.PROD_DB_PASSWORD,
-    //       database: process.env.PROD_DB_DATABASE,
-    //     },
-    //   ],
-    // },
     entities: entityArr,
     autoLoadEntities: true,
     synchronize: false,
